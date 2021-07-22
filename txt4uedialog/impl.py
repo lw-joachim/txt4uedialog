@@ -25,7 +25,8 @@ def get_node_dict(idCounter, xCord, yCord, rowDict):
                     "uILabel": rowDict["ui_label"],
                     "intent": rowDict["intent"],
                     "intentEscalation": rowDict["intent_escalation"],
-                    "audioId" : rowDict["key"]
+                    "audioId" : rowDict["key"],
+                    "speaker" : rowDict["speaker"]
                 },
                 "Events": [],
                 "Conditions": [],
