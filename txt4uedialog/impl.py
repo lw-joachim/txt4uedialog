@@ -10,9 +10,10 @@ import os
 logger = logging.getLogger(__name__)
 
 def get_node_dict(idCounter, xCord, yCord, rowDict):
+    isPlayer = True if rowDict["is_player"].lower() == "true" else False
     return  {
                 "id": idCounter,
-                "isPlayer": bool(rowDict["is_player"]),
+                "isPlayer": isPlayer,
                 "text": rowDict["text"],
                 "links": [],
                 "coordinates": {
@@ -21,7 +22,7 @@ def get_node_dict(idCounter, xCord, yCord, rowDict):
                 },
                 "properties": {
                     "_ClassName": "DialogueNodeProperties_C",
-                    "camera": "NewEnumerator0",
+                    "camera": "NewEnumerator1",
                     "uILabel": rowDict["ui_label"],
                     "intent": rowDict["intent"],
                     "intentEscalation": rowDict["intent_escalation"],
@@ -40,7 +41,7 @@ def get_node_dict(idCounter, xCord, yCord, rowDict):
 def convert_to_json_files(csv_input_path, json_output_dir):
     sceneDict = {}
     logger.info(f"Reading file {csv_input_path}")
-    with open(csv_input_path, newline=None) as csvfile:
+    with open(csv_input_path, newline=None, errors="replace", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
         currXCord, currYCord = 0, 0
         for i, row in enumerate(reader):
